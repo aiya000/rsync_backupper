@@ -1,4 +1,4 @@
 #!/bin/sh
 echo 'Starting archive'
-tar jcvf archives/`date +'%Y-%m-%d'`_ubuntu_sync.tar.bz2 ubuntu_sync.ext4
+tar jcvf archives/`date +'%Y-%m-%d'`_filesystem.tar.bz2 filesystem.ext4
 echo '>> Finish'
