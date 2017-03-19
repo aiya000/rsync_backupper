@@ -1,13 +1,13 @@
 #!/bin/sh
-if [ ! -f ./filesystem.ext4 ] ; then
+if [ ! -f ./filesystem.dev ] ; then
 	echo 'rsync error' 1>&2
 	echo 'Please Exec neerest by this script directory' 1>&2
 	exit 1
 fi
 
-sudo mount -t ext4 -o loop,rw filesystem.ext4 mnt \
+sudo mount -o loop,rw filesystem.dev mnt \
 	&& sudo rsync \
 		--exclude-from ./exclude.txt \
-		-va --delete / mnt/
+		-avh --delete / mnt/
 
 sudo umount mnt
