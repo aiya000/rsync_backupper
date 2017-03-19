@@ -1,69 +1,49 @@
 # rsync_backupper
+The backup and restore tool for the whole of your filesystem :+1:
 
-## About
-
-This is rsync backup and restore tools for Linux filesystems.
-
-* Require tool
-  - rsync
-  - sudo
-  - tar
+# Requirements
+- rsync
+- sudo
+- tar
 
 
-## Steps
+# How to use
 
-### Preparation for Backup and Restore
+- `{...}` can be choice as some path by you
 
-1. `$ mount /dev/foo /path/ignored/dir && cd /path/ignored/dir`
-  - /dev/foo isn't backup target filesystem
-2. `$ git clone https://github.com/aiya000/rsync_backupper.git Backup && cd Backup`
-3. `$ dd if=/dev/zero of=filesystem.ext4 bs=800M count=100`
-  - You can choice bs value and count value for target filesystem
-4. `$ mkfs -t ext4 filesystem.ext4`
+## Prepare
 
-### How to Backup filesystem
+1. git clone this in a sufficiently large device
+    - `git clone https://github.com/aiya000/rsync_backupper {backupper-path} && cd {backupper-path}`
+2. mount a device file which is backup target
+    - `mount /dev/foo {bar-path} && cd {bar-path}`
+3. Create a file of empty loopback device
+    - `dd if=/dev/zero of=filesystem.dev bs=800M count=100`
+    - filesystem.dev must be bigger than `/dev/foo`
+4. Create the filesystem
+    - `mkfs -t ext4 filesystem.dev`
+    - I recommend ext4 but you may can choice your favorite format
+5. Modify exclude.txt for your environment <a name="modify-exclude-txt"></a>
+    - exclude.txt is read by backup.sh
+    - You must add {backupper-path} to it
+6. Modify restore.sh for your environment
+    - TODO: Depend outer file
 
-`$ ./backup.sh`  
-or  
-`$ source backup.sh` (if `/dev/foo` deny directly execute script)
+## Backup
 
-### How to Restore filesystem
+1. Run `./backup.sh`
+    - or `source backup.sh` if running is denied
 
-`$ ./restore.sh`  
-or  
-`$ source restore.sh` (if `/dev/foo` deny directly execute script)
+## Restore
 
-
-## Configuration
-
-You can edit ./exclude.txt .  
-The exclude.txt contains paths excluded on the backup.
+1. Run `./restore.sh`
+    - or `source restore.sh` if running is denied
 
 ## Notice
+Don't forget to [add here to exclude.txt](#modify-exclude-txt) !  
+If you forgot this, backing up is never finished :cry:
 
-This directory must not be put `filesystem.ext4` to target filesystem.  
-( We use care recursive backup )
 
-### Examples
-
-1. `$ cd ~ && git clone https://github.com/aiya000/rsync_backupper.git Backup && cd Backup`
-2. `$ dd if=/dev/zero of=filesystem.ext4 bs=800M count=100 && mkfs -t ext4 filesystem.ext4`
-3. `$ ./backup.sh`
-  - recursively backup
-
-1. `$ mount /dev/foo /home/user/backup && cd /home/user/backup/Backup`
-2. `$ ./backup.sh`
-  - recursively backup
-
-- - -
-
-## TODO
+# TODO
 
 - Don't require sudo ( require from user side )
-
-- - -
-
-author: aiya000  
-since:  2014-04 ?  
-英語おかしかったら教えてください。
-あ、全部おかしいですね :)
