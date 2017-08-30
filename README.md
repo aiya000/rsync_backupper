@@ -1,5 +1,5 @@
 # rsync_backupper
-The backup and restore tool for the whole of your filesystem :+1:
+My backup and restore tool for the whole of device filesystems :+1:
 
 # Requirements
 - rsync
@@ -25,7 +25,6 @@ The backup and restore tool for the whole of your filesystem :+1:
     - I recommend ext4 but you may can choice your favorite format
 5. Modify exclude.txt for your environment <a name="modify-exclude-txt"></a>
     - exclude.txt is read by backup.sh
-    - You must add {backupper-path} to it
 6. Modify restore.sh for your environment
     - TODO: Depend outer file
 
@@ -40,7 +39,9 @@ The backup and restore tool for the whole of your filesystem :+1:
     - or `source restore.sh` if running is denied
 
 ## Notice
-Don't forget to [add here to exclude.txt](#modify-exclude-txt) !  
+Don't forget to [add here to exclude.txt](#modify-exclude-txt)
+if you want to backing up a device in itself.
+
 If you forgot this, backing up is never finished :cry:
 
 
