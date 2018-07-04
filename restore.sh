@@ -1,12 +1,14 @@
 #!/bin/sh
 restore_root=$HOME/mnt
 
+#!/bin/bash
 if [ ! -f ./filesystem.dev ] ; then
-	echo 'rsync error' 1>&2
-	echo 'Please Exec neerest by this script directory' 1>&2
-	exit 1
+    echo 'rsync error' 1>&2
+    echo 'Please Exec neerest by this script directory' 1>&2
+    exit 1
 fi
 
+(
 sudo mount -o loop,rw filesystem.dev mnt ; wait
 
 sudo rsync -avh --delete ./mnt/bin/           "$restore_root/bin"
@@ -24,6 +26,8 @@ sudo rsync -avh --delete ./mnt/vmlinuz        "$restore_root/vmlinuz.old"
 sudo rsync -avh --delete ./mnt/vmlinuz.old    "$restore_root/vmlinuz.old"
 sudo rsync -avh --delete ./mnt/initrd.img     "$restore_root/initrd.img"
 sudo rsync -avh --delete ./mnt/initrd.img.old "$restore_root/initrd.img.old"
+) | tee restore.log
+
 wait
 
 sudo umount mnt

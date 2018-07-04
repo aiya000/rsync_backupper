@@ -1,11 +1,9 @@
 /boot
-/cdrom
 /dev
 /lost+found
-/media
 /mnt
 /proc
-/run
-/srv
-/sys
 /tmp
+/sys
+/var
+/home/aiya000/hdd
