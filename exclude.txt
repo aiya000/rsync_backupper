@@ -7,3 +7,4 @@
 /sys
 /var
 /home/aiya000/hdd
+/home/aiya000/mnt

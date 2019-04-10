@@ -1,6 +1,3 @@
-#!/bin/sh
-backup_root=$HOME/mnt
-
 #!/bin/bash
 if [ ! -f ./filesystem.dev ] ; then
     echo 'rsync error' 1>&2
@@ -8,11 +5,13 @@ if [ ! -f ./filesystem.dev ] ; then
     exit 1
 fi
 
-sudo mount -o loop,rw filesystem.dev mnt \
-    && sudo rsync \
-    --exclude-from ./exclude.txt \
-    -avh --delete "$backup_root" mnt/ \
-    -avh --delete / mnt/ \
-        | tee backup.log
+sudo mount -o loop,rw filesystem.dev mnt
+cd mnt
 
+sudo rsync \
+    --exclude-from ../exclude.txt \
+    -avh --delete /* . \
+        | tee ../backup.log
+
+cd ..
 sudo umount mnt
