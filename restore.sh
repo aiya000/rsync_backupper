@@ -1,5 +1,10 @@
 #!/bin/sh
-restore_root=$HOME/mnt
+
+if [[ -z $1 ]] ; then
+    echo 'Please specify mounted path.'
+    echo 'e.g. ./restore.sh /mnt'
+fi
+restore_root=$1
 
 #!/bin/bash
 if [ ! -f ./filesystem.dev ] ; then
