@@ -2,3 +2,4 @@ filesystem.dev
 backup.log
 archives/*-*-filesystem.dev
 restore.log
+mnt/*
