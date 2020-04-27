@@ -1,6 +1,6 @@
 #!/bin/bash
 if [ ! -f ./filesystem.dev ] ; then
-    echo 'Please make ./filesystem.dev and ext4 first.'
+    echo 'Please make ./filesystem.dev with formatting by ext4 first.'
     exit 1
 fi
 
