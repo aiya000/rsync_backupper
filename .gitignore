@@ -1,5 +1,5 @@
 filesystem.dev
 backup.log
-archives/*-*-filesystem.dev
+archives/*
 restore.log
 mnt/*
